@@ -4,23 +4,26 @@
 %global libusdm_soversion 0
 Name:             qatlib
 Version:          21.05.0
-Release:          1%{?dist}
+Release:          1
 Summary:          Intel QuickAssist user space library
 # The entire source code is released under BSD.
 # For a breakdown of inbound licenses see the INSTALL file.
 License:          BSD and (BSD or GPLv2)
 URL:              https://github.com/intel/%{name}
 Source0:          https://github.com/intel/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:    systemd gcc make autoconf automake libtool systemd-devel openssl-devel zlib-devel
-Requires(pre):    shadow-utils
-# https://bugzilla.redhat.com/show_bug.cgi?id=1897661
-ExcludeArch:      %{arm} aarch64 %{power64} s390x i686
 
-%{?systemd_requires}
+BuildRequires:  autoconf
+BuildRequires:  automake
+BuildRequires:  libtool
+BuildRequires:  pkgconfig(libsystemd)
+BuildRequires:  pkgconfig(openssl)
+BuildRequires:  pkgconfig(systemd)
+BuildRequires:  pkgconfig(zlib)
+Requires(pre):    shadow
 
 %description
 Intel QuickAssist Technology (Intel QAT) provides hardware acceleration
-for offloading security, authentication and compression services from the
+for offloading secpkgurity, authentication and compression services from the
 CPU, thus significantly increasing the performance and efficiency of
 standard platform solutions.
 
@@ -40,7 +43,7 @@ This package contains headers and libraries required to build applications
 that use the Intel QuickAssist APIs.
 
 %prep
-%autosetup
+%autosetup -p1
 
 %build
 autoreconf -vif
