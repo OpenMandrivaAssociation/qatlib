@@ -46,6 +46,8 @@ that use the Intel QuickAssist APIs.
 %autosetup -p1
 
 %build
+export CC=gcc
+export CXX=g++
 autoreconf -vif
 %configure
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
