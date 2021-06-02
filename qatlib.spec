@@ -1,7 +1,8 @@
-# SPDX-License-Identifier: MIT
+%define major 0
 
-%global libqat_soversion  0
-%global libusdm_soversion 0
+%define libname	%mklibname %{name} %{major}
+%define devname	%mklibname -d %{name}
+
 Name:             qatlib
 Version:          21.05.0
 Release:          1
@@ -9,8 +10,8 @@ Summary:          Intel QuickAssist user space library
 # The entire source code is released under BSD.
 # For a breakdown of inbound licenses see the INSTALL file.
 License:          BSD and (BSD or GPLv2)
-URL:              https://github.com/intel/%{name}
-Source0:          https://github.com/intel/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+URL:              https://github.com/intel/qatlib
+Source0:          https://github.com/intel/qatlib/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  automake
@@ -19,7 +20,8 @@ BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(zlib)
-Requires(pre):    shadow
+Requires(pre):  shadow
+Requires:       %{libname} = %{EVRD}
 
 %description
 Intel QuickAssist Technology (Intel QAT) provides hardware acceleration
@@ -34,11 +36,23 @@ lossless data compression.
 This package provides user space libraries that allow access to
 Intel QuickAssist devices and expose the Intel QuickAssist APIs.
 
-%package       devel
-Summary:       Headers and libraries to build applications that use qatlib
-Requires:      %{name}%{?_isa} = %{version}-%{release}
+%package -n %{libname}
+Summary:        Library for Intel QuickAssist Technology (Intel QAT) provides hardware acceleration for offloading.
+Group:          System/Libraries
+Requires:       %{name} = %{EVRD}
 
-%description   devel
+%description -n %{libname}
+Intel QuickAssist Technology (Intel QAT) provides hardware acceleration
+for offloading secpkgurity, authentication and compression services from the
+CPU, thus significantly increasing the performance and efficiency of
+standard platform solutions.
+
+%package -n %{devname}
+Summary:       Headers and libraries for qatlib - Intel QuickAssist Technology.
+Requires:       %{libname} = %{EVRD}
+Requires:       %{name} = %{EVRD}
+
+%description -n	%{devname}
 This package contains headers and libraries required to build applications
 that use the Intel QuickAssist APIs.
 
@@ -57,8 +71,8 @@ sed -i -e 's! -shared ! -Wl,--as-needed\0!g' libtool
 
 %install
 %make_install
-rm %{buildroot}/%{_libdir}/libqat-%{version}.so
-rm %{buildroot}/%{_libdir}/libusdm-%{version}.so
+#rm %{buildroot}/%{_libdir}/libqat-%{version}.so
+#rm %{buildroot}/%{_libdir}/libusdm-%{version}.so
 rm %{buildroot}/%{_libdir}/libqat.la
 rm %{buildroot}/%{_libdir}/libusdm.la
 
@@ -77,15 +91,17 @@ exit 0
 
 %files
 %license LICENSE*
-%{_libdir}/libqat.so.%{libqat_soversion}*
-%{_libdir}/libusdm.so.%{libusdm_soversion}*
 %{_sbindir}/qatmgr
 %{_sbindir}/qat_init.sh
 %{_unitdir}/qat.service
 %{_mandir}/man8/qat_init.sh.8*
 %{_mandir}/man8/qatmgr.8*
 
-%files         devel
+%files -n %{libname}
+%{_libdir}/libqat.so.%{major}*
+%{_libdir}/libusdm.so.%{major}*
+
+%files -n %{devname}
 %{_libdir}/libqat.so
 %{_libdir}/libusdm.so
 %{_includedir}/qat
