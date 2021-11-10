@@ -1,4 +1,4 @@
-%define major 0
+%define major 2
 
 %define libname	%mklibname %{name} %{major}
 %define devname	%mklibname -d %{name}
@@ -99,9 +99,9 @@ exit 0
 
 %files -n %{libname}
 %{_libdir}/libqat.so.%{major}*
-%{_libdir}/libqat-%{version}.so
+#{_libdir}/libqat-%{version}.so
 %{_libdir}/libusdm.so.%{major}*
-%{_libdir}/libusdm-%{version}.so
+#{_libdir}/libusdm-%{version}.so
 
 %files -n %{devname}
 %{_libdir}/libqat.so
