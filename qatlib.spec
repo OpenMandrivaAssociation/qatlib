@@ -4,7 +4,7 @@
 %define devname	%mklibname -d %{name}
 
 Name:             qatlib
-Version:          21.05.0
+Version:          21.11.0
 Release:          1
 Summary:          Intel QuickAssist user space library
 # The entire source code is released under BSD.
@@ -60,8 +60,8 @@ that use the Intel QuickAssist APIs.
 %autosetup -p1
 
 %build
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 autoreconf -vif
 %configure
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
