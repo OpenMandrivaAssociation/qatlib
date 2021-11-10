@@ -100,8 +100,7 @@ exit 0
 %files -n %{libname}
 %{_libdir}/libqat.so.%{major}*
 #{_libdir}/libqat-%{version}.so
-#{_libdir}/libusdm.so.%{major}*
-#{_libdir}/libusdm-%{version}.so
+%{_libdir}/libusdm.so.0*
 
 %files -n %{devname}
 %{_libdir}/libqat.so
