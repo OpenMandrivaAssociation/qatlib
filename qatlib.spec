@@ -20,6 +20,7 @@ BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(zlib)
+BuildRequires:  yasm-devel
 Requires(pre):  shadow
 Requires:       %{libname} = %{EVRD}
 
