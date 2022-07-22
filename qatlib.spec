@@ -1,10 +1,10 @@
-%define major 2
+%define major 3
 
 %define libname	%mklibname %{name} %{major}
 %define devname	%mklibname -d %{name}
 
 Name:             qatlib
-Version:          21.11.0
+Version:          22.07.0
 Release:          1
 Summary:          Intel QuickAssist user space library
 # The entire source code is released under BSD.
@@ -20,6 +20,7 @@ BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(zlib)
+BuildRequires:  yasm-devel
 Requires(pre):  shadow
 Requires:       %{libname} = %{EVRD}
 
