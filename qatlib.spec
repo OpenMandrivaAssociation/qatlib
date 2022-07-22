@@ -93,7 +93,7 @@ exit 0
 %files
 %license LICENSE*
 %{_sbindir}/qatmgr
-%{_sbindir}/qat_init.sh
+#{_sbindir}/qat_init.sh
 %{_unitdir}/qat.service
 %{_mandir}/man8/qat_init.sh.8*
 %{_mandir}/man8/qatmgr.8*
