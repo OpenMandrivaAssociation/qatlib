@@ -77,6 +77,9 @@ sed -i -e 's! -shared ! -Wl,--as-needed\0!g' libtool
 rm %{buildroot}/%{_libdir}/libqat.la
 rm %{buildroot}/%{_libdir}/libusdm.la
 
+mv %{buildroot}%{_sbindir}/qatmgr %{buildroot}%{_bindir}/qatmgr
+mv %{buildroot}%{_sbindir}/qat_init.sh %{buildroot}%{_bindir}/qat_init.sh
+
 %pre
 getent group qat >/dev/null || groupadd -r qat
 exit 0
@@ -92,8 +95,8 @@ exit 0
 
 %files
 %license LICENSE*
-%{_sbindir}/qatmgr
-#{_sbindir}/qat_init.sh
+%{_bindir}/qatmgr
+%{_bindir}/qat_init.sh
 %{_unitdir}/qat.service
 %{_mandir}/man8/qat_init.sh.8*
 %{_mandir}/man8/qatmgr.8*
