@@ -13,6 +13,8 @@ License:          BSD and (BSD or GPLv2)
 URL:              https://github.com/intel/qatlib
 Source0:          https://github.com/intel/qatlib/archive/%{version}/%{name}-%{version}.tar.gz
 
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  libtool
