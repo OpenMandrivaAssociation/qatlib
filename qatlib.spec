@@ -4,8 +4,8 @@
 %define devname	%mklibname -d %{name}
 
 Name:             qatlib
-Version:          22.07.0
-Release:          3
+Version:          26.02.0
+Release:          1
 Summary:          Intel QuickAssist user space library
 # The entire source code is released under BSD.
 # For a breakdown of inbound licenses see the INSTALL file.
